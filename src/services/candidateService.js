@@ -1,10 +1,27 @@
 import axios from "axios";
 
-import React from 'react'
-
 export default class CandidateService{
-    getCandidates() {
-        return axios.get("http://localhost:8080/api/candidates/getall");
+
+    getCandidate(id){
+        return axios.get("http://localhost:8080/api/candidates/getById?id="+id);
     }
+
+    getCandidates(){
+        return axios.get("http://localhost:8080/api/candidates/getAll");
+    }
+
+    addCandidate(value){
+        return axios.post("http://localhost:8080/api/candidates/add",value);
+    }
+
+    updateCandidate(id,value){
+        return axios.put("http://localhost:8080/api/candidates/update/"+id,value);
+    }
+
+    deleteCandidate(id){
+        return axios.delete("http://localhost:8080/api/candidates/delete?id="+id)
+    }
+
+
 
 }

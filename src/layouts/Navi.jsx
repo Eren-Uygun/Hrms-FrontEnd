@@ -1,39 +1,36 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Container, Icon, Menu } from "semantic-ui-react";
-import SignedIn from "./SignedIn";
-import SignedOut from "./SignedOut";
+import React, { Component, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { Menu } from 'semantic-ui-react'
 
-export default function Navi() {
+export default function Navi(){
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-  
-    function handleSignIn(params) {
-      setIsAuthenticated(true);
-    }
-  
-    function handleSignOut(params) {
-      setIsAuthenticated(false);
-    }
+
+    const [activeItem, setActiveItem] = useState("home");
+
+    const setActiveItemOnClick = (e, { name }) => {
+      console.log(name);
+      setActiveItem(name);
+    };
+
+
   
     return (
-      <div>
-        <Menu inverted fixed="top">
-          <Container>
-            <Menu.Item name="home">
-              <Icon name="building outline" />
-              <Link to={`/`}>İnsan Kaynakları Yönetim Sistemi</Link>
-            </Menu.Item>
-            <Menu.Item name="messages" />
-  
-            <Menu.Menu position="right">
+        <div>
+            <Menu inverted fixed="top" size="large">
+            <Menu.Item name="Anasayfa" active={activeItem === "Anasayfa"} onClick={setActiveItemOnClick} as={NavLink} to="/" />
+            <Menu.Item name="İş İlanları" active={activeItem === "İş İlanları"} onClick={setActiveItemOnClick} as={NavLink} to="/jobAdvertisements" />
+            <Menu.Item name="Özgeçmişler" active={activeItem === "Özgeçmişler"} onClick={setActiveItemOnClick} as= {NavLink} to="/curriculumVitaes"/>
+
+
+            {/* <Menu.Menu position="right">
               {isAuthenticated ? (
                 <SignedIn signOut={handleSignOut} />
               ) : (
                 <SignedOut signIn={handleSignIn} />
               )}
-            </Menu.Menu>
-          </Container>
+            </Menu.Menu> */}
         </Menu>
-      </div>
-    );
-  }
+            
+        </div>
+    )
+}
